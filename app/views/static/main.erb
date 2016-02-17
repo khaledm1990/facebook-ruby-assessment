@@ -1,0 +1,57 @@
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading"><h3>Questions</h3></div>
+
+  <div class="panel-body">
+      <% unless @list.nil? %>
+      <ul>
+        <% @list.each do |p| %>
+        <% @p_u = User.find(p.user_id) %>
+        <label>
+         <b> <%=@p_u.username%> posted=> </b> <b> <%= p.text %> </b>
+        </label><br>
+          <% if (p.user_id == session[:current_user_id])%>
+          <form action="/user/post/<%= p.id %>/edit" method="get">
+            <input type="submit" value="Edit post">
+           </form>
+           <form action="/user/post/<%= p.id %>/delete" method="post">
+            <input type="submit" value="Delete post">
+           </form>
+            <%end%>
+
+
+            <ul>
+              <% @comments_list = Comment.where(post_id: p.id).order(:id) %>
+              <% @comments_list.each do |c| %>
+              <% @c_u = User.find(c.user_id) %>
+              <b> <%=@c_u.username%> commented=> </b> <%= c.text %>
+              <br>
+              <% if (c.user_id == session[:current_user_id])%>
+              <form action="/user/comment/<%= c.id %>/edit" method="get">
+                <input type="submit" value="Edit comment">
+               </form>
+               <form action="/user/comment/<%= c.id %>/delete" method="post">
+                <input type="submit" value="Delete comment">
+               </form>
+              <%end%>
+              <%end%>
+            </ul>
+
+            <ul>
+             <li><form method = 'post' action ='/user/<%= @user.id %>/post/<%= p.id %>/comment/new' class="form-inline">
+                  <div class="form-group">
+                  <input type="text "placeholder="comment here" name="comment[text]" >
+                  </div>
+                  <div class="form-group">
+                 <input type="submit" value ="comment" class="btn btn-default">
+                 </div>
+                </form></li><br>
+             </ul>
+
+        <%end%>
+        </ul>
+        <%end%>
+     </div>
+ </div>

@@ -1,0 +1,85 @@
+
+
+<!-- <div>
+<%= @user.username%><br>
+<%= @user.email%><br>
+</div> -->
+<% @posts =  Post.where(user_id: @user.id) %>
+<div >
+  <div class="panel-heading"></div>
+
+  <div class="panel-body">
+      <%unless @posts.nil? %>
+  <!-- Table -->
+      <table class="table">
+
+        <tr>
+          <th>My Posts</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+
+        <% @posts.each do |p| %>
+        <tr>
+          <td><%= p.text %> </td>
+          <td>
+            <form action="/user/post/<%= p.id %>/edit" method="get">
+            <input type="submit" value="Edit">
+           </form>
+          </td>
+          <td>
+            <form action="/user/post/<%= p.id %>/delete" method="post">
+            <input type="submit" value="Delete">
+           </form>
+          </td>
+        </tr>
+        <% end %>
+
+      </table>
+      <% end %>
+
+    </div>
+
+
+    <% @comments =  Comment.where(user_id: @user.id) %>
+    <div class="panel-heading"></div>
+    <div class="panel-body">
+      <%unless @posts.nil? %>
+  <!-- Table -->
+      <table class="table">
+
+        <tr>
+          <th>My Comment</th>
+          <th></th>
+          <th></th>
+        </tr>
+
+        <% @comments.each do |c| %>
+        <tr>
+          <td><%= c.text %> </td>
+
+          <td>
+            <form action="/user/comment/<%= c.id %>/edit" method="get">
+            <input type="submit" value="Edit">
+           </form>
+          </td>
+          <td>
+            <form action="/user/comment/<%= c.id %>/delete" method="post">
+            <input type="submit" value="Delete">
+           </form>
+          </td>
+        </tr>
+        <% end %>
+
+      </table>
+      <% end %>
+
+    </div>
+
+
+
+  </div>
+
+
+

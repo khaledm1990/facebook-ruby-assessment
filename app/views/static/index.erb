@@ -1,2 +1,11 @@
-<h1>Hello World</h1>
-<p>See Me in views/static/index.html.erb</p>
+
+
+
+<h2>Sign up for an account</h2>
+<form method = 'post' action ='/user/signup'>
+  <input type="text" placeholder="Name " name="user[username]" ><br>
+  <input type="text" placeholder="Email" name="user[email]" ><br>
+  <input type="password" placeholder="password" name="user[password]" ><br>
+  <input type="submit" value="Signup">
+
+</form>

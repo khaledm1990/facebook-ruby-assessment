@@ -12,6 +12,7 @@ require 'pathname'
 require 'pg'
 require 'active_record'
 require 'logger'
+require 'bcrypt'
 
 	# sinatra
 require 'sinatra'
@@ -20,6 +21,7 @@ require "sinatra/reloader" if development?
 	# embedded ruby
 require 'erb'
 require 'uri'
+require 'byebug'
 ######################################################################
 
 
